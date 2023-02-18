@@ -1,0 +1,31 @@
+number = input('Enter the number of friends joining (including you):\n')
+print('')
+list_party = {}
+if int(number) <= 0:
+    print('\nNo one is joining for the party')
+else:
+    print('Enter the name of every friend (including you), each on a new line:')
+    for i in range(int(number)):
+        name = input()
+        list_party.update({name: 0})
+    bill = int(input('\nEnter the total bill value:\n'))
+    print('\nDo you want to use the "Who is lucky?" feature? Write Yes/No:')
+    answer = input()
+    print('')
+    if answer == 'Yes':
+        import random
+        selected = random.choice(list(list_party))
+        print(selected + ' is the lucky one!\n')
+        for i in list_party.keys():
+            if i != selected and answer == 'Yes':
+                list_party[i] = round(bill/(int(number)-1),2)    
+            else:
+                list_party[i] = 0
+    else:
+        print('No one is going to be lucky\n')
+        for i in list_party.keys():
+            list_party[i] = round(bill/(int(number)),2)   
+    bill_per = round(bill / int(number),2)
+    
+    #print('')
+    print(list_party)
